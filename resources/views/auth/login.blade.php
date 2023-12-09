@@ -39,9 +39,14 @@
                 </a>
             @endif
 
+            
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+        </div>
+
+        <div class="flex justify-center mt-5">
+            <a href="/register"><p>Don't have an account?</p></a>
         </div>
     </form>
 </x-guest-layout>

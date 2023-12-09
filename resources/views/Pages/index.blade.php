@@ -32,9 +32,9 @@
                 <h1 class="text-lg font-bold">Register</h1>
             </div>
             <!-- Sign In -->
-            <div class="bg-black border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg">
+            <a href="/login"><div class="bg-black border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg">
                 <h1 class="text-lg text-white font-bold">Sign In</h1>
-            </div>
+            </div></a>
         </div>
     </div>
 

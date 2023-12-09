@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MoviesController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        return view('Pages.index');
     }
 
     /**
@@ -19,6 +19,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**

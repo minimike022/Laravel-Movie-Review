@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,7 @@ use App\Http\Controllers\MoviesController;
 |
 */
 
-Route::resource('/index', MoviesController::class);
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', UserController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,3 +29,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'usertype:admin'])->group(function() {
+    Route::get('/admin', [UserController::class, 'admin']);
+});
+Route::middleware(['auth', 'usertype:user'])->group(function() {
+    Route::get('/index', [UserController::class, 'index']);
+});
+
