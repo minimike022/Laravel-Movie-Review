@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\adminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +35,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'usertype:admin'])->group(function() {
-    Route::get('/admin', [UserController::class, 'admin']);
+    Route::get('/admin', [adminController::class, 'adminIndex']);
 });
 Route::middleware(['auth', 'usertype:user'])->group(function() { 
     Route::get('/user/userInfoForms', [UserController::class, 'userInfoForms']);
     Route::get('/user/reviews', [UserController::class, 'userReviews']);
-    
 });
+
+Route::get('/adminlogout', [adminController::class, 'destroy']);
 
 

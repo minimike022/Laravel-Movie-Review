@@ -14,9 +14,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
 
-    public function admin() {
-        return view('Pages.admin');
-    }
+    
     public function index()
     {
         return view('Pages.index');
