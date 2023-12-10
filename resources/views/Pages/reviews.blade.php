@@ -6,9 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Navbar -->
-    <div>
-
-    </div>
+<h1>Reviews</h1>
 </body>
 </html>

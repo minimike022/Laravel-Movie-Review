@@ -33,10 +33,11 @@ class AuthenticatedSessionController extends Controller
         if($request->user()->usertype === 'admin') {
             $url = '/admin';
         }else if($request->user()->usertype === 'user') {
-            $url = '/index';
+            $url = '/users';
         }
 
-        return redirect()->intended($url);
+        $userID = $request->user()->id;
+        return redirect()->intended($url)->with('id', $userID);
     }
 
     /**
@@ -50,6 +51,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/index');
+        return redirect('/users');
     }
 }

@@ -16,7 +16,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::resource('/', UserController::class);
+Route::resource('users', UserController::class);
+Route::resource('movies', MoviesController::class);
+Route::get('/', [UserController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,7 +35,10 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'usertype:admin'])->group(function() {
     Route::get('/admin', [UserController::class, 'admin']);
 });
-Route::middleware(['auth', 'usertype:user'])->group(function() {
-    Route::get('/index', [UserController::class, 'index']);
+Route::middleware(['auth', 'usertype:user'])->group(function() { 
+    Route::get('/user/userInfoForms', [UserController::class, 'userInfoForms']);
+    Route::get('/user/reviews', [UserController::class, 'userReviews']);
+    
 });
+
 

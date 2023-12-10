@@ -9,12 +9,12 @@
 </head>
 
 <body class="font-Poppins">
-    <div class="w-screen h-[4em] px-[3em] flex justify-between items-center">
+    <div class="w-screen h-[4em] px-[3em] mt-4 flex justify-between items-center">
         <!-- Navbar -->
-        <div class="flex w-[15em] justify-between items-center">
+        <div class="flex w-[20em] justify-between items-center">
             <a href="" class="text-xl font-extrabold">Home</a>
             <a href="" class="text-xl font-extrabold">Movies</a>
-            <a href="" class="text-xl font-extrabold">Reviews</a>
+            <a href="/user/reviews" class="text-xl font-extrabold">Reviews</a>
         </div>
         <!--Search Bar-->
         <div class="mr-6">
@@ -29,18 +29,22 @@
         <div class="flex">
             <!-- Register -->
             <div class="h-[2.5em] w-[6em] flex items-center">
-                <h1 class="text-lg font-bold">Register</h1>
+                <a href="/register">
+                    <h1 class="text-lg font-bold">Register</h1>
+                </a>
             </div>
             <!-- Sign In -->
-            <a href="/login"><div class="bg-black border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg">
-                <h1 class="text-lg text-white font-bold">Sign In</h1>
-            </div></a>
+            <a href="/login">
+                <div class="bg-black border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg">
+                    <h1 class="text-lg text-white font-bold">Sign In</h1>
+                </div>
+            </a>
         </div>
     </div>
 
     <!-- Lower Content -->
-    <div class="flex flex-col justify-between h-[4em] text-5xl font-extrabold mt-[2.5em] ml-[1em]">
-        <h1 class="text-6xl">Discover countless</h1>
+    <div class="flex flex-col justify-between h-[4em] text-6xl font-extrabold mt-[1.5em] ml-[1em]">
+        <h1>Discover countless</h1>
         <h1> Movies </h1>
         <h1> and TV Programs </h1>
     </div>
