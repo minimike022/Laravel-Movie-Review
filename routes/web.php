@@ -45,6 +45,7 @@ Route::middleware(['auth', 'usertype:user'])->group(function() {
 });
 
 Route::get('/adminlogout', [adminController::class, 'destroy']);
+Route::get('/userLogout', [UserController::class, 'logout']);
 Route::get('/movies/viewMovies/{id}', [MoviesController::class, 'viewMovies']);
 
 

@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body class="bg-black overflow-x-hidden">
-<div class="w-screen h-[4em] px-[3em] mt-4 flex justify-between items-center text-white">
+<div class="w-screen h-[4em] px-[3em] m-4 flex justify-between items-center text-white">
         <!-- Navbar -->
         <div class="flex w-[20em] justify-between items-center text-white">
-            <a href="" class="text-xl font-extrabold">Home</a>
+            <a href="/users" class="text-xl font-extrabold">Home</a>
             <a href="" class="text-xl font-extrabold">Movies</a>
             <a href="/user/reviews" class="text-xl font-extrabold">Reviews</a>
         </div>
@@ -42,7 +42,7 @@
 
     <!-- Upper Part -->
     <div class="text-white">
-        <img src="{{asset($movies->moviePhoto)}}" class="w-screen h-[25em]" alt="fsdsfsdaawd">
+        <img src="{{asset($movies->moviePhoto)}}" class="w-screen h-[30em]" alt="fsdsfsdaawd">
         <!--text Contentes-->
         <div class="m-10">
             <h1 class="text-white text-7xl font-bold">{{$movies->movieTitle}}</h1>
@@ -68,12 +68,12 @@
         @endif
     </div>
 
-
+    <h1 class="text-white m-4 text-4xl font-bold">Reviews</h1>
     <div class="text-white">
-        <table>
-            <tr>
+        <table class="w-screen">
+            <tr class="flex flex-col items-center">
                 @foreach ($review as $reviews)
-                <td>
+                <td class="flex justify-start bg-blue-500 h-[10em] w-[70em] m-4">
                     {{$reviews->First_Name}}
                     {{$reviews->reviews}}
                     {{$reviews->rating}}

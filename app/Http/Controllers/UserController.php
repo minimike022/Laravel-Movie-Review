@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserInfo;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use App\Models\movieInfo;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,6 +84,17 @@ class UserController extends Controller
     }
     public function userReviews(){
         return view('Pages.review');
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/users');
     }
 
     public function userInfoForms() {
