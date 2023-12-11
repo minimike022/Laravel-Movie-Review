@@ -10,7 +10,12 @@
 
 <body class="font-Poppins overflow-x-hidden">
     <!-- Navbar -->
-    <div class="w-screen h-[4em] flex justify-end shadow-xl shadow-gray-200">
+    <div class="w-screen h-[4em] flex justify-end items-center shadow-xl shadow-gray-200">
+        <form action="">
+            @csrf
+            <input type="text" name="search" id="search" placeholder="Search:"
+                class="h-[2em] w-[15em] focus:outline-red-500 border-black rounded-lg">
+        </form>
         <div class="flex items-center justify-between w-[14em] mx-[4em]">
             <h1 class="text-xl">Hi! {{Auth::user()->name}}</h1>
             <!-- Logout Button -->
@@ -22,66 +27,53 @@
         </div>
     </div>
 
-    <!-- Buttons -->
-    <div class='w-screen flex justify-center'>
-        <div class="m-[1em] w-[60em] flex justify-between items-center">
-            <h1 id="headerText" class="text-2xl font-bold">Users</h1>
-            <div class="flex items-center justify-between w-[30em]">
-                <form action="">
-                    @csrf   
-                    <input type="text" name="search" id="search" placeholder="Search:" class="h-[2em] w-[15em] focus:outline-red-500 border-black rounded-lg">
-                </form>
-                <button class="bg-black border-2 h-[3em] w-[7em] flex justify-center items-center rounded-lg">
-                    <h1 class="text-white text-lg font-bold">Users</h1>
-                </button>
-                <button class="bg-black border-2 h-[3em] w-[7em] flex justify-center items-center rounded-lg">
-                    <h1 class="text-white text-lg font-bold">Movies</h1>
-                </button>
+    <!-- Add Movies -->
+    <div class=" w-screen flex justify-center flex-col items-center">
+        <h1 class="text-4xl m-4">Insert Movies</h1>
+        <form method="post" action="{{route('movies.store')}}" enctype='multipart/form-data' class="flex justify-around w-[55em]">
+            @csrf
+            <div class="flex flex-col h-[15em]">
+            <input type="text" name="movieTitle" placeholder="Title" class="w-[23em] rounded-md text-lg font-bold">
+            <input type="text" name="movieDescription" placeholder="Description" class="w-[23em] h-[8.2em] rounded-md text-lg font-bold mt-4">
             </div>
-        </div>
+
+            <div class="flex flex-col">
+            <input type="date" name="movieDate" placeholder="Release Date" class="w-[23em] rounded-md text-lg">
+            <input type="text" name="movieGenre" placeholder="Genre" class="w-[23em] rounded-md text-lg font-bold mt-4">
+            <input type="file" name="moviePhoto" class="w-[23em] rounded-md text-lg mt-4">
+            <input type="submit" name="submit" class="w-[23em] rounded-md text-lg text-white font-bold bg-green-400 mt-4 h-[2em]">
+            </div>
+            
+        </form>
+        
     </div>
 
+    <h1 class="text-6xl ml-5 font-extrabold">Movies</h1>
+    <div class="flex justify-center">
+        <table class="flex justify-start flex-wrap w-[70em]">
+            <tr class="flex justify-between w-[50em] flex-wrap">
+                @foreach ($movies as $movie)
+                <td class="flex flex-col justify-center items-center mt-10"><img src="{{$movie->moviePhoto}}" alt=""
+                        class="h-[10em] w-[15em] rounded-lg">
+                    {{$movie->movieTitle}}
+                    <div class="flex justify-between w-[13em]">
+                        <a href="movies/{{$movie->movieID}}/edit"
+                            class="bg-blue-500 border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg text-white font-bold">Update</a>
+                        <form action="{{route('movies.destroy', $movie->movieID)}}" method='post'>
+                            @csrf
+                            @method('delete')
+                            <button type='submit'
+                                class="bg-red-500 border-2 h-[2.5em] w-[6em] flex justify-center items-center rounded-lg text-white font-bold">Delete</button>
+                        </form>
 
-    <!-- Users -->
-    <div id="userModal" class="w-screen flex justify-center">
-        <div class="h-[25em] p-10 bg-gray-200 shadow-lg shadow-gray-300">
-            <div class="h-[20em] w-[60em] overflow-y-scroll">
-                <table class="w-full text-center">
-                    <thead class="">
-                        <tr class="text-xl font-bold">
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Middle Name</td>
-                            <td>Gender</td>
-                            <td>Birthday</td>
-                            <td>Address</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    @foreach($users as $user)
-                    <tbody>
-                        <tr>
-                            <td>{{$user->First_Name}}</td>
-                            <td>{{$user->Last_Name}}</td>
-                            <td>{{$user->Middle_Name}}</td>
-                            <td>{{$user->Gender}}</td>
-                            <td>{{$user->birthday}}</td>
-                            <td>{{$user->address}}</td>
-                            <td><Button>Update</Button>
-                                <Button>Delete</Button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    </div>
+                </td>
+                @endforeach
+            </tr>
 
-                    @endforeach
-                </table>
-            </div>
-        </div>
+        </table>
     </div>
 
 </body>
-<script>
-    var headerText = document.getElementById('headerText');
-    headerText.textContent = "Movies";
-</script>
+
 </html>

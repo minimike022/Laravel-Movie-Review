@@ -3,32 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UserInfo;
-use App\Models\User;
-use App\Models\movieInfo;
+use App\Models\reviews;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MoviesController;
+use App\Models\UserInfo;
+use App\Models\movieInfo;
 
-
-class UserController extends Controller
+class ReviewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    
     public function index()
     {
-        $movies = movieInfo::all();
-        return view('Pages.index', compact('movies'));
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('Pages.index');
+        //
     }
 
     /**
@@ -36,18 +32,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $this->validate($request,
+        
+        $validatedData = $this->validate($request, 
         [
-            'id' => 'required',
-            'First_Name' => 'required',
-            'Last_Name'=> 'required',
-            'Middle_Name'=> 'required',
-            'Gender'=> 'required',
-            'birthdate'=> 'required',
-            'address'=> 'required',
+            'userID' => 'required',
+            'movieID' => 'required',
+            'rating' => 'required',
+            'reviews' => 'required'
         ]);
-        UserInfo::create($validatedData);
-        return redirect(route('users.index'));
+        reviews::create($validatedData);
     }
 
     /**
@@ -81,11 +74,4 @@ class UserController extends Controller
     {
         //
     }
-    public function userReviews(){
-        return view('Pages.review');
-    }
-
-    public function userInfoForms() {
-        return view('Pages.userInfoForms');
-    }
-}
+ }

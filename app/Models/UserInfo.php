@@ -22,4 +22,5 @@ class UserInfo extends Model
         'birthdate',
         'address',
     ];
+
 }

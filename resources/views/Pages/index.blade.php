@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body class="font-Poppins">
+<body class="font-Poppins overflow-x-hidden">
     <div class="w-screen h-[4em] px-[3em] mt-4 flex justify-between items-center">
         <!-- Navbar -->
         <div class="flex w-[20em] justify-between items-center">
@@ -50,6 +50,22 @@
     </div>
     <div class="w-full flex justify-center absolute top-[30em]">
         <a href=""><img src="{{ URL('media/downarrow.png') }}" alt="" class="h-[4em] w-[4em]"></a>
+    </div>
+
+    <!-- Lower Content -->
+    <div class="w-screen h-[40em] bg-black mt-[10em] p-[3em]">
+        <h1 class="text-white font-bold text-6xl">Movies</h1>
+        <table class="mt-[3em]">
+            <tr class="flex">
+                @foreach ($movies as $movie)
+                <td class="flex flex-col items-center mx-5 text-white">
+                    <a href="movies/viewMovies/{{$movie->movieID}}">
+                    <img src="{{$movie->moviePhoto}}" alt="" class="w-[15em] h-[20em] rounded-lg">
+                    <h1 class="text-xl font-bold mt-4">{{$movie->movieTitle}}</h1></a>
+                </td>
+                @endforeach
+            </tr>
+        </table>
     </div>
 </body>
 

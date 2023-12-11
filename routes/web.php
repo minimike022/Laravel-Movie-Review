@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\ReviewsController;
 
 
 /*
@@ -20,6 +21,7 @@ use App\Http\Controllers\adminController;
 
 Route::resource('users', UserController::class);
 Route::resource('movies', MoviesController::class);
+Route::resource('reviews', ReviewsController::class);
 Route::get('/', [UserController::class, 'index']);
 
 Route::get('/dashboard', function () {
@@ -43,5 +45,6 @@ Route::middleware(['auth', 'usertype:user'])->group(function() {
 });
 
 Route::get('/adminlogout', [adminController::class, 'destroy']);
+Route::get('/movies/viewMovies/{id}', [MoviesController::class, 'viewMovies']);
 
 
