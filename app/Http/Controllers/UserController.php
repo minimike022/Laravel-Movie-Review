@@ -19,8 +19,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $movies = movieInfo::all();
-        return view('Pages.index', compact('movies'));
+        return view('Pages.index');
     }
 
 
@@ -84,6 +83,10 @@ class UserController extends Controller
     }
     public function userReviews(){
         return view('Pages.review');
+    }
+
+    public function movieSection() {
+        return view('Pages.movies');
     }
 
     public function logout(Request $request): RedirectResponse

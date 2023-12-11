@@ -15,6 +15,8 @@ class MoviesController extends Controller
      */
     public function index()
     {
+        $movies = movieInfo::all();
+        return view('Pages.movies', compact('movies'));
     }
 
     /**
@@ -38,7 +40,7 @@ class MoviesController extends Controller
         ]);
 
         $files = $request->all();
-        $imageName = time().'.'.$request->moviePhoto->extension();
+        $imageName = time() . '.' . $request->moviePhoto->extension();
         $path = $request->moviePhoto->move(('moviePhoto'), $imageName);
         $files['moviePhoto'] = $path;
 
@@ -96,13 +98,43 @@ class MoviesController extends Controller
         return redirect('/admin');
     }
 
-    public function viewMovies($id) {
+    public function viewMovies($id)
+    {
         $movies = movieInfo::where('movieID', $id)->first();
         $review = DB::table('reviews')
-        ->join('user_info', 'user_info.id', '=', 'reviews.userID')
-        ->where('movieID', $id)
-        ->get();
+            ->join('user_info', 'user_info.id', '=', 'reviews.userID')
+            ->where('movieID', $id)
+            ->get();
 
         return view('Pages.viewMovies', compact('movies', 'review'));
+    }
+
+    public function searchMovies(Request $request)
+    {
+        $searchMov = $request->get('searchValue');
+        $data = movieInfo::where('movieTitle', 'LIKE', '%' . $searchMov . '%')->get();
+
+        $output = '';
+
+        foreach ($data as $row) {
+            $output .= '
+                <td>
+                <a href="movies/viewMovies/'.$row->movieID. '">
+                <div>
+                    <img src="'.$row->moviePhoto.'" class="h-[15em] w-[17em] backdrop-blur-lg" alt="">
+                    <div
+                        class="absolute bg-black h-[15em] w-[17em] top-[6em] opacity-0 hover:opacity-70 text-white flex justify-center items-center">
+                        <h1 class="text-xl font-bold">'.$row->movieTitle.'</h1>
+                    </div>
+                </div>
+                </a>
+                </td>
+            
+            
+            ';
+            
+        }
+        return $output;
+
     }
 }

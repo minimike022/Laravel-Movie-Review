@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'usertype:admin'])->group(function() {
+    Route::get('adminSearch', [adminController::class, 'searchMovies']);
     Route::get('/admin', [adminController::class, 'adminIndex']);
 });
 Route::middleware(['auth', 'usertype:user'])->group(function() { 
@@ -47,5 +48,6 @@ Route::middleware(['auth', 'usertype:user'])->group(function() {
 Route::get('/adminlogout', [adminController::class, 'destroy']);
 Route::get('/userLogout', [UserController::class, 'logout']);
 Route::get('/movies/viewMovies/{id}', [MoviesController::class, 'viewMovies']);
+Route::get('search', [MoviesController::class, 'searchMovies']);
 
 

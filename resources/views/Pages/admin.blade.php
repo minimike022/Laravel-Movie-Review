@@ -5,6 +5,7 @@
     @vite('resources/css/app.css')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -51,7 +52,7 @@
     <h1 class="text-6xl ml-5 font-extrabold">Movies</h1>
     <div class="flex justify-center">
         <table class="flex justify-start flex-wrap w-[70em]">
-            <tr class="flex justify-between w-[50em] flex-wrap">
+            <tr class="flex justify-between w-[50em] flex-wrap" id="moviePlace">
                 @foreach ($movies as $movie)
                 <td class="flex flex-col justify-center items-center mt-10"><img src="{{$movie->moviePhoto}}" alt=""
                         class="h-[10em] w-[15em] rounded-lg">
@@ -75,5 +76,24 @@
     </div>
 
 </body>
+<script>
+    $(document).ready(function() {
+        $('#search').on('keyup', function() {
+        var searchVal = $(this).val();
+        
+        $.ajax({
+            url: "adminSearch",
+            method: 'GET',
+            data: {
+                searchValue:searchVal,
+            },
+            success:function(result) {
+                $('#moviePlace').html(result)
+            }
+
+        })
+    });
+    })
+</script>
 
 </html>

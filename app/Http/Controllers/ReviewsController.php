@@ -41,6 +41,8 @@ class ReviewsController extends Controller
             'reviews' => 'required'
         ]);
         reviews::create($validatedData);
+
+        return redirect('/movies/viewMovies/'.$request->movieID);
     }
 
     /**
