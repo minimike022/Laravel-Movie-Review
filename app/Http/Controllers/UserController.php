@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use App\Models\movieInfo;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 
 class UserController extends Controller
@@ -103,4 +104,12 @@ class UserController extends Controller
     public function userInfoForms() {
         return view('Pages.userInfoForms');
     }
+
+    public function googleLogin() {
+        return Socialite::driver('google')->redirect();
+    }
+    public function facebookLogin() {
+        return Socialite::driver('facebook')->redirect();
+    }
 }
+

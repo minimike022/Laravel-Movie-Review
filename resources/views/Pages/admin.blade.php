@@ -12,11 +12,6 @@
 <body class="font-Poppins overflow-x-hidden">
     <!-- Navbar -->
     <div class="w-screen h-[4em] flex justify-end items-center shadow-xl shadow-gray-200">
-        <form action="">
-            @csrf
-            <input type="text" name="search" id="search" placeholder="Search:"
-                class="h-[2em] w-[15em] focus:outline-red-500 border-black rounded-lg">
-        </form>
         <div class="flex items-center justify-between w-[14em] mx-[4em]">
             <h1 class="text-xl">Hi! {{Auth::user()->name}}</h1>
             <!-- Logout Button -->
@@ -31,22 +26,26 @@
     <!-- Add Movies -->
     <div class=" w-screen flex justify-center flex-col items-center">
         <h1 class="text-4xl m-4">Insert Movies</h1>
-        <form method="post" action="{{route('movies.store')}}" enctype='multipart/form-data' class="flex justify-around w-[55em]">
+        <form method="post" action="{{route('movies.store')}}" enctype='multipart/form-data'
+            class="flex justify-around w-[55em]">
             @csrf
             <div class="flex flex-col h-[15em]">
-            <input type="text" name="movieTitle" placeholder="Title" class="w-[23em] rounded-md text-lg font-bold">
-            <input type="text" name="movieDescription" placeholder="Description" class="w-[23em] h-[8.2em] rounded-md text-lg font-bold mt-4">
+                <input type="text" name="movieTitle" placeholder="Title" class="w-[23em] rounded-md text-lg font-bold">
+                <input type="text" name="movieDescription" placeholder="Description"
+                    class="w-[23em] h-[8.2em] rounded-md text-lg font-bold mt-4">
             </div>
 
             <div class="flex flex-col">
-            <input type="date" name="movieDate" placeholder="Release Date" class="w-[23em] rounded-md text-lg">
-            <input type="text" name="movieGenre" placeholder="Genre" class="w-[23em] rounded-md text-lg font-bold mt-4">
-            <input type="file" name="moviePhoto" class="w-[23em] rounded-md text-lg mt-4">
-            <input type="submit" name="submit" class="w-[23em] rounded-md text-lg text-white font-bold bg-green-400 mt-4 h-[2em]">
+                <input type="date" name="movieDate" placeholder="Release Date" class="w-[23em] rounded-md text-lg">
+                <input type="text" name="movieGenre" placeholder="Genre"
+                    class="w-[23em] rounded-md text-lg font-bold mt-4">
+                <input type="file" name="moviePhoto" class="w-[23em] rounded-md text-lg mt-4">
+                <input type="submit" name="submit"
+                    class="w-[23em] rounded-md text-lg text-white font-bold bg-green-400 mt-4 h-[2em]">
             </div>
-            
+
         </form>
-        
+
     </div>
 
     <h1 class="text-6xl ml-5 font-extrabold">Movies</h1>
@@ -76,24 +75,5 @@
     </div>
 
 </body>
-<script>
-    $(document).ready(function() {
-        $('#search').on('keyup', function() {
-        var searchVal = $(this).val();
-        
-        $.ajax({
-            url: "adminSearch",
-            method: 'GET',
-            data: {
-                searchValue:searchVal,
-            },
-            success:function(result) {
-                $('#moviePlace').html(result)
-            }
-
-        })
-    });
-    })
-</script>
 
 </html>

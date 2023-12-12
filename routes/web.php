@@ -6,6 +6,8 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\GoogleAuthController;
+
 
 
 /*
@@ -23,6 +25,7 @@ Route::resource('users', UserController::class);
 Route::resource('movies', MoviesController::class);
 Route::resource('reviews', ReviewsController::class);
 Route::get('/', [UserController::class, 'index']);
+Route::get('/auth/googleCallback', [GoogleAuthController::class, 'callbackGoogle']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,15 +42,17 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'usertype:admin'])->group(function() {
     Route::get('adminSearch', [adminController::class, 'searchMovies']);
     Route::get('/admin', [adminController::class, 'adminIndex']);
+    Route::get('/adminlogout', [adminController::class, 'destroy']);
 });
 Route::middleware(['auth', 'usertype:user'])->group(function() { 
     Route::get('/user/userInfoForms', [UserController::class, 'userInfoForms']);
     Route::get('/user/reviews', [UserController::class, 'userReviews']);
+    Route::get('/userLogout', [UserController::class, 'logout']); 
 });
-
-Route::get('/adminlogout', [adminController::class, 'destroy']);
-Route::get('/userLogout', [UserController::class, 'logout']);
 Route::get('/movies/viewMovies/{id}', [MoviesController::class, 'viewMovies']);
 Route::get('search', [MoviesController::class, 'searchMovies']);
+Route::get('/googleLogin', [UserController::class, 'googleLogin']);
+Route::get('/facebookLogin', [UserController::class, 'facebookLogin']);
+
 
 

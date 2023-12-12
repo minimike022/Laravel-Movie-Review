@@ -31,4 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_SECRET_ID'),
+        'redirect' => 'http://127.0.0.1:8000/users',
+    ],
+    'facebook' => [
+        'client_id' => '1308541693182972',
+        'client_secret' => '194a8bd524d5ef98dcf34fa68caca507',
+        'redirect' => 'http://localhost:8000/users',
+    ],
+
 ];
